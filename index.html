@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDP Records Management System</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-chart-line"></i> GDP Record Management</h1>
+            <p>Economy Country GDP Record CRUD Application - MongoDB Project</p>
+        </header>
+
+        <div class="controls">
+            <button id="addBtn" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Add GDP Record Here
+            </button>
+            <div class="filters">
+                <input type="text" id="searchCountry" placeholder="Search by country...">
+                <select id="filterRegion">
+                    <option value="">All Regions</option>
+                    <option value="Asia">Asia</option>
+                    <option value="Europe">Europe</option>
+                    <option value="North America">North America</option>
+                    <option value="South America">South America</option>
+                    <option value="Africa">Africa</option>
+                    <option value="Oceania">Oceania</option>
+                </select>
+                <input type="number" id="filterYear" placeholder="Filter by year" min="1960" max="2024">
+                <button id="resetFilters" class="btn btn-secondary">Reset</button>
+            </div>
+        </div>
+
+        <div class="stats-panel">
+            <div class="stat-card">
+                <h3 id="totalRecords">0</h3>
+                <p>Total Records</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="totalCountries">0</h3>
+                <p>Countries</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="avgGDP">$0</h3>
+                <p>Average GDP</p>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table id="gdpTable">
+                <thead>
+                    <tr>
+                        <th>Country</th>
+                        <th>Year</th>
+                        <th>GDP (USD Billions)</th>
+                        <th>GDP Per Capita</th>
+                        <th>Growth Rate (%)</th>
+                        <th>Region</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="gdpTableBody">
+                    <!-- Dynamic content -->
+                </tbody>
+            </table>
+        </div>
+
+        <div id="loading" class="loading hidden">
+            <i class="fas fa-spinner fa-spin"></i> Loading...
+        </div>
+    </div>
+
+    <!-- Modal for Add/Edit -->
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add GDP Record</h2>
+                <span class="close">&times;</span>
+            </div>
+            <form id="gdpForm">
+                <div class="form-group">
+                    <label for="country">Country Name *</label>
+                    <input type="text" id="country" name="country" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="year">Year *</label>
+                        <input type="number" id="year" name="year" min="1960" max="2024" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="region">Region *</label>
+                        <select id="region" name="region" required>
+                            <option value="">Select Region</option>
+                            <option value="Asia">Asia</option>
+                            <option value="Europe">Europe</option>
+                            <option value="North America">North America</option>
+                            <option value="South America">South America</option>
+                            <option value="Africa">Africa</option>
+                            <option value="Oceania">Oceania</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="gdpInUSD">GDP (USD Billions) *</label>
+                        <input type="number" id="gdpInUSD" name="gdpInUSD" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gdpPerCapita">GDP Per Capita (USD) *</label>
+                        <input type="number" id="gdpPerCapita" name="gdpPerCapita" step="0.01" min="0" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="growthRate">Growth Rate (%)</label>
+                    <input type="number" id="growthRate" name="growthRate" step="0.01">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Record</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
